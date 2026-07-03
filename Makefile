@@ -1,72 +1,68 @@
 # **************************************************************************** #
-#                                 CONFIGURATION                                #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/02/23 17:11:10 by mimacdou          #+#    #+#              #
+#    Updated: 2026/07/03 18:29:34 by klejdi           ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
-NAME		= cub3D
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
-RM			= rm -rf
+NAME = cub3D
+CC = cc
+MLX_PATH = ./minilibx_macos
+FLAGS = -Wall -Wextra -Werror -I$(MLX_PATH) -g3 -O0
+LIBFT = Libft/libft.a
+MLX = $(MLX_PATH)/libmlx42.a
+FRAMEWORKS = -L/opt/homebrew/lib -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL -framework AppKit -framework IOKit -framework CoreFoundation -lm
+SRC = \
+		main \
+		src/arg_checks/check_args \
+		src/arg_checks/input_content_checks	\
+		src/arg_checks/extra_input_content_checks \
+		src/arg_checks/ex_ex_input_content_checks \
+		src/arg_checks/additional_rgb_checks \
+		src/arg_checks/map_checks \
+		src/arg_checks/extra_map_checks	\
+		src/arg_checks/check_utils \
+		src/parsing/first \
+		src/parsing/player \
+		src/render/test_mlx \
+		src/render/exit \
+		src/render/hooks \
+		src/render/input \
+		src/render/mlx_init \
+		src/render/render \
+		src/render/raycasting \
+		src/render/graphics \
+		src/clean_up/janitor \
 
-# **************************************************************************** #
-#                                   MINILIBX                                   #
-# **************************************************************************** #
+SRCS = $(addsuffix .c, $(SRC))
+OBJS = $(addsuffix .o, $(SRC))
 
-MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
-MLX_DIR		= ./minilibx-linux
-MLX_LIB		= $(MLX_DIR)/libmlx.a
-MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+HEADERS = cub3D.h
 
-# **************************************************************************** #
-#                                    SOURCES                                   #
-# **************************************************************************** #
+%.o: %.c $(HEADERS)
+	$(CC) $(FLAGS) -c $< -o $@
 
-# Add your source files here (adjust names as needed)
-SRCS		= main.c \
-			  parse.c \
-			  raycast.c \
-			  movement.c \
-			  utils.c
+all: $(NAME)
 
-OBJS		= $(SRCS:.c=.o)
+$(LIBFT):
+		$(MAKE) -C Libft FLAGS="$(FLAGS)"
 
-# **************************************************************************** #
-#                                    RULES                                     #
-# **************************************************************************** #
-
-all: $(MLX_LIB) $(NAME)
-
-# Clone and compile minilibx if not already present
-$(MLX_LIB):
-	@if [ ! -d "$(MLX_DIR)" ]; then \
-		echo "Cloning minilibx-linux..."; \
-		git clone $(MLX_REPO) $(MLX_DIR); \
-	fi
-	@echo "Compiling minilibx..."
-	cd $(MLX_DIR) && ./configure
-
-# Compile cub3D
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
-
-# Compile object files with minilibx header path
-%.o: %.c
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
+$(NAME): $(LIBFT) $(OBJS)
+		$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLX) $(FRAMEWORKS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
-	@if [ -d "$(MLX_DIR)" ]; then \
-		echo "Cleaning minilibx object files..."; \
-		cd $(MLX_DIR) && make clean; \
-	fi
+	rm -f *.o src/*/*.o
+	$(MAKE) -C Libft clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(MLX_DIR)
+	rm -f $(NAME)
+	$(MAKE) -C Libft fclean
 
 re: fclean all
 
-# Optional: remove only the minilibx directory
-mlxclean:
-	$(RM) $(MLX_DIR)
-
-.PHONY: all clean fclean re mlxclean
+.PHONY: all clean fclean re
