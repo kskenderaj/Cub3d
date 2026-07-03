@@ -2,7 +2,7 @@
 
 ## Description
 
-cub3D is a 3D graphical representation of a maze viewed from a first-person perspective, implemented using ray-casting principles with the miniLibX library. The project demonstrates fundamental computer graphics concepts including ray-sphere intersection, 3D projection, and texture mapping.
+cub3D is a 3D graphical representation of a maze viewed from a first-person perspective, learned using ray-casting principles with the miniLibX library. The project demonstrates fundamental computer graphics concepts including ray-sphere intersection, 3D projection, and texture mapping.
 
 The program creates an immersive maze exploration experience where players can navigate through walls with different textures for each cardinal direction (North, South, East, West) and customizable floor and ceiling colors.
 
@@ -74,11 +74,11 @@ C 225,30,0
 ## AI Usage
 
 AI (Claude) was used for the following:
-1. **Raycasting Algorithm** - Implemented the complete DDA-based ray-casting engine in `src/render/raycasting.c` including ray-wall intersection detection, perpendicular distance calculation, and wall side determination (North/South/East/West)
-2. **Rendering Pipeline** - Created the complete frame rendering system in `src/render/render.c` with floor/ceiling color drawing, wall height calculation, and texture mapping
-3. **Keyboard Controls** - Implemented player movement and rotation in `src/render/hooks.c` with collision detection and smooth camera manipulation
-4. **Player Initialization** - Set up player state initialization in `src/parsing/player.c` with proper direction vectors and camera plane setup
-5. **Graphics Utilities** - Created pixel operations and color handling in `src/render/graphics.c`
-6. **Code Structure** - Organized modular function architecture while adhering to 42 norm standards
+1. **Raycasting Algorithm** - Helped us learn the complete DDA-based ray-casting engine in `src/render/raycasting.c` including ray-wall intersection detection, perpendicular distance calculation, and wall side determination (North/South/East/West)
+2. **Rendering Pipeline** - Helped us build the frame rendering system in `src/render/render.c` with floor/ceiling color drawing, wall height calculation, and texture mapping
+3. **Keyboard Controls** - Helped us learn player movement and rotation in `src/render/hooks.c` with collision detection and smooth camera manipulation
+4. **Player Initialization** - Helped us set up player state initialization in `src/parsing/player.c` with proper direction vectors and camera plane setup
+5. **Graphics Utilities** - Helped us create pixel operations and color handling in `src/render/graphics.c`
+6. **Code Structure** - Helped us organize a modular function architecture while adhering to 42 norm standards
 
-The AI focused on implementing the mathematically-intensive rendering systems while maintaining code quality and the 42 norm standards for function length and complexity.
+The AI focused on supporting our learning of the mathematically intensive rendering systems while maintaining code quality!
