@@ -12,28 +12,31 @@
 
 #include "../../cub3d.h"
 
-static int is_walkable(t_game *game, double x, double y)
+static int is_point_walkable(t_game *game, double x, double y)
 {
 	int map_x;
 	int map_y;
-	double radius;
 
-	radius = 0.2;
-	map_x = (int)(x - radius);
-	map_y = (int)(y - radius);
+	map_x = (int)x;
+	map_y = (int)y;
 	if (map_y < 0 || map_y >= store_house(999))
 		return (0);
 	if (map_x < 0 || map_x >= (int)ft_strlen(game->map[map_y]))
 		return (0);
 	if (game->map[map_y][map_x] == '1')
 		return (0);
-	map_x = (int)(x + radius);
-	map_y = (int)(y + radius);
-	if (map_y < 0 || map_y >= store_house(999))
+	return (1);
+}
+
+static int is_walkable(t_game *game, double x, double y)
+{
+	if (!is_point_walkable(game, x - 0.2, y - 0.2))
 		return (0);
-	if (map_x < 0 || map_x >= (int)ft_strlen(game->map[map_y]))
+	if (!is_point_walkable(game, x + 0.2, y - 0.2))
 		return (0);
-	if (game->map[map_y][map_x] == '1')
+	if (!is_point_walkable(game, x - 0.2, y + 0.2))
+		return (0);
+	if (!is_point_walkable(game, x + 0.2, y + 0.2))
 		return (0);
 	return (1);
 }

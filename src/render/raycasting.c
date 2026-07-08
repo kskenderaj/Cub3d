@@ -21,6 +21,10 @@ static void init_ray_dir(t_game *game, double *ray_dir_x,
     camera_x = 2.0 * x / 800.0 - 1.0;
     *ray_dir_x = game->player.dir_x + game->player.plane_x * camera_x;
     *ray_dir_y = game->player.dir_y + game->player.plane_y * camera_x;
+    if (*ray_dir_x == 0)
+        *ray_dir_x = 1e-9;
+    if (*ray_dir_y == 0)
+        *ray_dir_y = 1e-9;
 }
 
 static void init_step(double ray_dir_x, double ray_dir_y,
