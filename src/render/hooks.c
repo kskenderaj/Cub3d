@@ -10,15 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 static int is_walkable(t_game *game, double x, double y)
 {
 	int map_x;
 	int map_y;
+	double radius;
 
-	map_x = (int)x;
-	map_y = (int)y;
+	radius = 0.2;
+	map_x = (int)(x - radius);
+	map_y = (int)(y - radius);
+	if (map_y < 0 || map_y >= store_house(999))
+		return (0);
+	if (map_x < 0 || map_x >= (int)ft_strlen(game->map[map_y]))
+		return (0);
+	if (game->map[map_y][map_x] == '1')
+		return (0);
+	map_x = (int)(x + radius);
+	map_y = (int)(y + radius);
 	if (map_y < 0 || map_y >= store_house(999))
 		return (0);
 	if (map_x < 0 || map_x >= (int)ft_strlen(game->map[map_y]))
@@ -35,11 +45,10 @@ static void move_player(t_game *game, double move_x, double move_y)
 
 	new_x = game->player.x + move_x;
 	new_y = game->player.y + move_y;
-	if (is_walkable(game, new_x, new_y))
-	{
+	if (is_walkable(game, new_x, game->player.y))
 		game->player.x = new_x;
+	if (is_walkable(game, game->player.x, new_y))
 		game->player.y = new_y;
-	}
 }
 
 void handle_movement(t_game *game)

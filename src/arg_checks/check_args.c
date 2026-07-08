@@ -12,7 +12,7 @@
 
 
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 void	print_extras(int flag)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 #include <math.h>
 
 extern void handle_movement(t_game *game);

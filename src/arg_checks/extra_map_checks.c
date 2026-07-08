@@ -12,7 +12,7 @@
 
 
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 int	get_player_coords(char **matrix, int height, int flag)
 {

@@ -12,7 +12,7 @@
 
 
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 static bool	texture_checks_two(char *map, int flag)
 {

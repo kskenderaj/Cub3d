@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int main(int ac, char **av)
 {
@@ -21,7 +21,7 @@ int main(int ac, char **av)
 	parser(&game, av[1]);
 	init_player(&game);
 	init_mlx(&game);
-	render_frame(&game);
+	mlx_loop_hook(game.mlx.mlx, render_frame, &game);
 	mlx_loop(game.mlx.mlx);
 	free_game(&game);
 	return (0);

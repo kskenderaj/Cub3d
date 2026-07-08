@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 static void find_player_position(t_game *game, char **map)
 {

@@ -12,7 +12,7 @@
 
 
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 char	*gnl_to_matrix(char *line, int len)
 {

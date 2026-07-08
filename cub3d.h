@@ -93,6 +93,8 @@ typedef struct s_ray
 	double dir_y;
 	double perp_dist;
 	int side;
+	int step_x;
+	int step_y;
 } t_ray;
 
 typedef struct s_game
@@ -151,7 +153,7 @@ int key_press(int keycode, t_game *game);
 void init_hooks(t_game *game);
 int close_window(t_game *game);
 void init_mlx(t_game *game);
-void render_frame(t_game *game);
+void render_frame(void *param);
 void test_mlx(t_game *game);
 void cast_ray(t_game *game, t_ray *ray, int x);
 void put_pixel(t_game *game, int x, int y, int color);

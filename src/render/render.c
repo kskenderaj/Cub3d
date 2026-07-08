@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 #include <math.h>
 
 static int get_rgb(char **color)
@@ -19,14 +19,14 @@ static int get_rgb(char **color)
 					   ft_atoi(color[2])));
 }
 
-static void draw_ceiling_floor(t_game *game, int x, int draw_start)
+static void draw_ceiling_floor(t_game *game, int x, int draw_start, int draw_end)
 {
 	int y;
 
 	y = 0;
 	while (y < draw_start)
 		put_pixel(game, x, y++, get_rgb(game->ceiling_color));
-	y = draw_start + ((600 - draw_start) / 2) + 1;
+	y = draw_end;
 	while (y < 600)
 		put_pixel(game, x, y++, get_rgb(game->floor_color));
 }
@@ -51,23 +51,35 @@ static void draw_column(t_game *game, int x, t_ray *ray)
 {
 	int line_height;
 	int draw_start;
+	int draw_end;
 
 	line_height = (int)(600 / ray->perp_dist);
 	draw_start = (600 - line_height) / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_ceiling_floor(game, x, draw_start);
+	draw_end = draw_start + line_height;
+	if (draw_end > 600)
+		draw_end = 600;
+	draw_ceiling_floor(game, x, draw_start, draw_end);
 	draw_wall(game, x, draw_start, ray);
 }
 
-void render_frame(t_game *game)
+void render_frame(void *param)
 {
-	int x;
-	t_ray ray;
+	t_game	*game;
+	int		x;
+	t_ray	ray;
+	static int frame_count = 0;
+fprintf(stderr, "frame %d\n", frame_count++);
 
+	game = (t_game *)param;
 	x = 0;
 	while (x < 800)
 	{
+	cast_ray(game, &ray, x);
+if (x == 400)
+    fprintf(stderr, "x=400 perp_dist=%f\n", ray.perp_dist);
+draw_column(game, x, &ray);
 		cast_ray(game, &ray, x);
 		draw_column(game, x, &ray);
 		x++;

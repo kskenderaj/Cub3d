@@ -12,7 +12,7 @@
 
 
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 char	*cycle_gnl(int fd, char *to_search)
 {

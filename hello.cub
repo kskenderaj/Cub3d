@@ -5,8 +5,8 @@
                        SO Maps/SOUTH_Texture_tes.xpm
     WE Maps/west_texture_text.xpm
 EA Maps/east_texture_test.xpm
-      F    100,100,100  
-C 255   ,   100,10
+F 30,144,255
+C 135,206,235
 
 1111111111111111111111111
 1000000000110000000000001

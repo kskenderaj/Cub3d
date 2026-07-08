@@ -12,11 +12,26 @@
 
 NAME = cub3D
 CC = cc
-MLX_PATH = ./minilibx_macos
-FLAGS = -Wall -Wextra -Werror -I$(MLX_PATH) -g3 -O0
+UNAME_S := $(shell uname -s)
+
 LIBFT = Libft/libft.a
+
+ifeq ($(UNAME_S),Linux)
+MLX_PATH = ./minilibx_linux
+MLX_BUILD = $(MLX_PATH)/build
+MLX = $(MLX_BUILD)/libmlx42.a
+MLX_INCLUDE = -I$(MLX_PATH)/include
+MLX_LINK = -ldl -lglfw -pthread -lm
+CLEAN_MLX = rm -rf $(MLX_BUILD)
+else
+MLX_PATH = ./minilibx_macos
 MLX = $(MLX_PATH)/libmlx42.a
-FRAMEWORKS = -L/opt/homebrew/lib -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL -framework AppKit -framework IOKit -framework CoreFoundation -lm
+MLX_INCLUDE = -I$(MLX_PATH)
+MLX_LINK = -L/opt/homebrew/lib -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL -framework AppKit -framework IOKit -framework CoreFoundation -lm
+CLEAN_MLX =
+endif
+
+FLAGS = -Wall -Wextra -Werror -I. $(MLX_INCLUDE) -g3 -O0
 SRC = \
 		main \
 		src/arg_checks/check_args \
@@ -42,22 +57,31 @@ SRC = \
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(addsuffix .o, $(SRC))
 
-HEADERS = cub3D.h
+HEADERS = cub3d.h
 
-%.o: %.c $(HEADERS)
+.DEFAULT_GOAL := all
+
+$(OBJS): %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_LINK) -o $(NAME)
+
 $(LIBFT):
 		$(MAKE) -C Libft FLAGS="$(FLAGS)"
 
-$(NAME): $(LIBFT) $(OBJS)
-		$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLX) $(FRAMEWORKS) -o $(NAME)
+ifeq ($(UNAME_S),Linux)
+$(MLX):
+	cmake -S $(MLX_PATH) -B $(MLX_BUILD)
+	$(MAKE) -C $(MLX_BUILD) -j$$(nproc)
+endif
 
 clean:
 	rm -f *.o src/*/*.o
 	$(MAKE) -C Libft clean
+	$(CLEAN_MLX)
 
 fclean: clean
 	rm -f $(NAME)

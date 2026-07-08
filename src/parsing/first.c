@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "../../cub3d.h"
 
 char get_starting_direction(char **map)
 {
