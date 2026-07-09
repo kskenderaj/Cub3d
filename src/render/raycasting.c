@@ -44,6 +44,20 @@ static void init_step(double ray_dir_x, double ray_dir_y,
         ray->step_y = 1;
 }
 
+static void init_side_dists(t_game *game, t_ray *ray,
+                            int map_x, int map_y,
+                            double *side_dist_x, double *side_dist_y)
+{
+    if (ray->dir_x < 0)
+        *side_dist_x = (game->player.x - map_x) * fabs(1.0 / ray->dir_x);
+    else
+        *side_dist_x = (map_x + 1.0 - game->player.x) * fabs(1.0 / ray->dir_x);
+    if (ray->dir_y < 0)
+        *side_dist_y = (game->player.y - map_y) * fabs(1.0 / ray->dir_y);
+    else
+        *side_dist_y = (map_y + 1.0 - game->player.y) * fabs(1.0 / ray->dir_y);
+}
+
 static void dda_loop(t_game *game, t_ray *ray, double *side_dist_x,
                      double *side_dist_y, int *map_x, int *map_y)
 {
@@ -87,8 +101,7 @@ void cast_ray(t_game *game, t_ray *ray, int x)
     map_y = (int)game->player.y;
     init_ray_dir(game, &ray->dir_x, &ray->dir_y, x);
     init_step(ray->dir_x, ray->dir_y, game->player.x, game->player.y, ray);
-    side_dist_x = fabs((game->player.x - map_x) / ray->dir_x);
-    side_dist_y = fabs((game->player.y - map_y) / ray->dir_y);
+    init_side_dists(game, ray, map_x, map_y, &side_dist_x, &side_dist_y);
     dda_loop(game, ray, &side_dist_x, &side_dist_y, &map_x, &map_y);
     step_correction_x = (1.0 - ray->step_x) / 2.0;
     step_correction_y = (1.0 - ray->step_y) / 2.0;

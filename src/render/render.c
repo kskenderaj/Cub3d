@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:53:31 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:29:33 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/09 14:34:51 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,12 @@ void render_frame(void *param)
 	int		x;
 	t_ray	ray;
 	static int frame_count = 0;
-fprintf(stderr, "frame %d\n", frame_count++);
+	fprintf(stderr, "frame %d\n", frame_count++);
 
 	game = (t_game *)param;
 	x = 0;
 	while (x < 800)
 	{
-	cast_ray(game, &ray, x);
-if (x == 400)
-    fprintf(stderr, "x=400 perp_dist=%f\n", ray.perp_dist);
-draw_column(game, x, &ray);
 		cast_ray(game, &ray, x);
 		draw_column(game, x, &ray);
 		x++;
