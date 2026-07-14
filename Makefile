@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/23 17:11:10 by mimacdou          #+#    #+#              #
-#    Updated: 2026/07/03 18:29:34 by klejdi           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3D
 CC = cc
 UNAME_S := $(shell uname -s)
@@ -20,13 +8,13 @@ ifeq ($(UNAME_S),Linux)
 MLX_PATH = ./minilibx_linux
 MLX_BUILD = $(MLX_PATH)/build
 MLX = $(MLX_BUILD)/libmlx42.a
-MLX_INCLUDE = -I$(MLX_PATH)/include
+MLX_INCLUDE = -isystem$(MLX_PATH)/include    
 MLX_LINK = -ldl -lglfw -pthread -lm
 CLEAN_MLX = rm -rf $(MLX_BUILD)
 else
 MLX_PATH = ./minilibx_macos
 MLX = $(MLX_PATH)/libmlx42.a
-MLX_INCLUDE = -I$(MLX_PATH)
+MLX_INCLUDE = -isystem$(MLX_PATH)           
 MLX_LINK = -L/opt/homebrew/lib -L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL -framework AppKit -framework IOKit -framework CoreFoundation -lm
 CLEAN_MLX =
 endif
