@@ -41,6 +41,8 @@ SRC = \
 		src/render/raycasting \
 		src/render/graphics \
 		src/clean_up/janitor \
+		src/render/norm_helper \
+		src/render/extra_norm_helper \
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(addsuffix .o, $(SRC))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:51:45 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:29:32 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/19 09:02:04 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include <math.h>
 #include <errno.h>
+#include <unistd.h>
 #include <sys/time.h>
 #include "./Libft/libft.h"
 #include "MLX42/MLX42.h"
@@ -156,10 +157,18 @@ void init_mlx(t_game *game);
 void render_frame(void *param);
 void test_mlx(t_game *game);
 void cast_ray(t_game *game, t_ray *ray, int x);
+void load_textures(t_game *game);
 void put_pixel(t_game *game, int x, int y, int color);
 int get_wall_color(t_game *game, t_ray *ray, int y);
 int rgb_to_int(int r, int g, int b);
 void game_loop(void *param);
+void	load_one_texture(t_game *game, int index);
+void	fill_texture_data(t_game *game, t_texture *texture, xpm_t *xpm);
+int	get_texture_index(t_ray *ray);
+mlx_image_t	*get_texture_image(t_game *game, t_ray *ray);
+int	get_tex_x(t_game *game, t_ray *ray, mlx_image_t *image);
+int	get_tex_y(int y, mlx_image_t *image);
+int	get_tex_pixel(mlx_image_t *image, int tex_x, int tex_y);
 ////////////////////////FUNCTIONS END//////////////////////////
 
 #endif

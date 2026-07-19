@@ -6,7 +6,7 @@
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:52:20 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/19 02:22:28 by mimacdou         ###   ########.fr       */
+/*   Updated: 2026/07/19 08:55:23 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ bool	check_first_two_lines(char *texture)
 
 	fd = open(texture, O_RDWR);
 	line = get_next_line(fd);
-	if (!line || ft_strncmp(line, "/* XPM */", 10) != 0)
-		return (free(line), close(fd), false);
-	(free(line), line = get_next_line(fd));
-	if (!line || ft_strncmp(line, "static char *dummy[]={", 23) != 0)
+	if (!line || ft_strncmp(line, "!XPM42", 7) != 0)
 		return (free(line), close(fd), false);
 	return (free(line), close(fd), true);
 }
+	// (free(line), line = get_next_line(fd));
+	// if (!line || ft_strncmp(line, "static char *", 13) != 0)
+	// 	return (free(line), close(fd), false);
 
 static void	num_of_digits_check(int fd, char *line, int flag)
 {

@@ -27,18 +27,17 @@ static void	init_ray_dir(t_game *game, double *ray_dir_x,
 		*ray_dir_y = 1e-9;
 }
 
-static void	init_step(double ray_dir_x, double ray_dir_y,
-		double player_x, double player_y, t_ray *ray)
+static void	init_step(t_game *game, t_ray *ray)
 {
-	ray->dir_x = ray_dir_x;
-	ray->dir_y = ray_dir_y;
-	ray->start_x = player_x;
-	ray->start_y = player_y;
-	if (ray_dir_x < 0)
+	ray->dir_x = ray->dir_x;
+	ray->dir_y = ray->dir_y;
+	ray->start_x = game->player.x;
+	ray->start_y = game->player.y;
+	if (ray->dir_x < 0)
 		ray->step_x = -1;
 	else
 		ray->step_x = 1;
-	if (ray_dir_y < 0)
+	if (ray->dir_y < 0)
 		ray->step_y = -1;
 	else
 		ray->step_y = 1;
@@ -63,10 +62,8 @@ static void	dda_loop(t_game *game, t_ray *ray, double *side_dist_x,
 {
 	int	hit;
 	int	side;
-	int	mh;
 
 	hit = 0;
-	mh = store_house(999);
 	while (!hit)
 	{
 		if (*side_dist_x < *side_dist_y)
@@ -82,7 +79,8 @@ static void	dda_loop(t_game *game, t_ray *ray, double *side_dist_x,
 			side = 1;
 		}
 		if (*map_y >= \
-0 && *map_y < mh && *map_x >= 0 && *map_x < (int)ft_strlen(game->map[*map_y]))
+0 && *map_y < store_house(999) && \
+*map_x >= 0 && *map_x < (int)ft_strlen(game->map[*map_y]))
 			if (game->map[*map_y][*map_x] == '1')
 				hit = 1;
 		ray->side = side;
@@ -101,7 +99,7 @@ void	cast_ray(t_game *game, t_ray *ray, int x)
 	map_x = (int)game->player.x;
 	map_y = (int)game->player.y;
 	init_ray_dir(game, &ray->dir_x, &ray->dir_y, x);
-	init_step(ray->dir_x, ray->dir_y, game->player.x, game->player.y, ray);
+	init_step(game, ray);
 	init_side_dists(game, ray, map_x, map_y, &side_dist_x, &side_dist_y);
 	dda_loop(game, ray, &side_dist_x, &side_dist_y, &map_x, &map_y);
 	step_correction_x = (1.0 - ray->step_x) / 2.0;

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   extra_norm_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 15:53:23 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/19 07:20:40 by mimacdou         ###   ########.fr       */
+/*   Created: 2026/07/19 09:04:09 by mimacdou          #+#    #+#             */
+/*   Updated: 2026/07/19 09:04:33 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
-void	init_mlx(t_game *game)
+int	get_tex_y(int y, mlx_image_t *image)
 {
-	game->mlx.mlx = mlx_init(800, 600, "cub3D", false);
-	if (!game->mlx.mlx)
-		exit(1);
-	game->mlx.img = mlx_new_image(game->mlx.mlx, 800, 600);
-	if (!game->mlx.img)
-		exit(1);
-	mlx_image_to_window(game->mlx.mlx, game->mlx.img, 0, 0);
-	load_textures(game);
-	init_hooks(game);
+	int	tex_y;
+
+	tex_y = (int)((y * (int)image->height) / 64);
+	if (tex_y < 0)
+		tex_y = 0;
+	if (tex_y >= (int)image->height)
+		tex_y = (int)image->height - 1;
+	return (tex_y);
+}
+
+int	get_tex_pixel(mlx_image_t *image, int tex_x, int tex_y)
+{
+	uint32_t	*pixels;
+
+	pixels = (uint32_t *)image->pixels;
+	return (pixels[tex_y * image->width + tex_x]);
 }

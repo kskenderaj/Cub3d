@@ -6,7 +6,7 @@
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:52:25 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/19 02:22:30 by mimacdou         ###   ########.fr       */
+/*   Updated: 2026/07/19 08:53:03 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static bool	extension_check(char *str)
 
 	str_len = ft_strlen(str);
 	str_len--;
+	if (str[str_len--] != '2')
+		return (false);
+	if (str[str_len--] != '4')
+		return (false);
 	if (str[str_len--] != 'm')
 		return (false);
 	if (str[str_len--] != 'p')
