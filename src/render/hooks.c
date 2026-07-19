@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:53:12 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:29:33 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/19 02:37:18 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static int is_point_walkable(t_game *game, double x, double y)
+static	int	is_point_walkable(t_game *game, double x, double y)
 {
-	int map_x;
-	int map_y;
+	int	map_x;
+	int	map_y;
 
 	map_x = (int)x;
 	map_y = (int)y;
@@ -28,7 +28,7 @@ static int is_point_walkable(t_game *game, double x, double y)
 	return (1);
 }
 
-static int is_walkable(t_game *game, double x, double y)
+static int	is_walkable(t_game *game, double x, double y)
 {
 	if (!is_point_walkable(game, x - 0.2, y - 0.2))
 		return (0);
@@ -41,10 +41,10 @@ static int is_walkable(t_game *game, double x, double y)
 	return (1);
 }
 
-static void move_player(t_game *game, double move_x, double move_y)
+static void	move_player(t_game *game, double move_x, double move_y)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = game->player.x + move_x;
 	new_y = game->player.y + move_y;
@@ -54,23 +54,23 @@ static void move_player(t_game *game, double move_x, double move_y)
 		game->player.y = new_y;
 }
 
-void handle_movement(t_game *game)
+void	handle_movement(t_game *game)
 {
 	if (mlx_is_key_down(game->mlx.mlx, KEY_W))
-		move_player(game, game->player.dir_x * 0.1,
-					game->player.dir_y * 0.1);
+		move_player(\
+game, game->player.dir_x * 0.1, game->player.dir_y * 0.1);
 	if (mlx_is_key_down(game->mlx.mlx, KEY_S))
-		move_player(game, -game->player.dir_x * 0.1,
-					-game->player.dir_y * 0.1);
+		move_player(\
+game, -game->player.dir_x * 0.1, -game->player.dir_y * 0.1);
 	if (mlx_is_key_down(game->mlx.mlx, KEY_A))
-		move_player(game, -game->player.plane_x * 0.1,
-					-game->player.plane_y * 0.1);
+		move_player(\
+game, -game->player.plane_x * 0.1, -game->player.plane_y * 0.1);
 	if (mlx_is_key_down(game->mlx.mlx, KEY_D))
-		move_player(game, game->player.plane_x * 0.1,
-					game->player.plane_y * 0.1);
+		move_player(\
+game, game->player.plane_x * 0.1, game->player.plane_y * 0.1);
 }
 
-void init_hooks(t_game *game)
+void	init_hooks(t_game *game)
 {
 	mlx_loop_hook(game->mlx.mlx, (void *)&game_loop, game);
 }

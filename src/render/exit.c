@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:53:06 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:21:13 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/19 02:25:30 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int close_window(t_game *game)
+int	close_window(t_game *game)
 {
 	if (game->mlx.mlx)
 		mlx_close_window(game->mlx.mlx);

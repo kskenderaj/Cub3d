@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:53:38 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:21:11 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/19 02:21:29 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void test_mlx(t_game *game)
+void	test_mlx(t_game *game)
 {
 	(void)game;
 }

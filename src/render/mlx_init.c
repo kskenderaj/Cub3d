@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klejdi <klejdi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:53:23 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/03 18:21:12 by klejdi           ###   ########.fr       */
+/*   Updated: 2026/07/19 02:27:46 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void init_mlx(t_game *game)
+void	init_mlx(t_game *game)
 {
 	game->mlx.mlx = mlx_init(800, 600, "cub3D", false);
 	if (!game->mlx.mlx)
