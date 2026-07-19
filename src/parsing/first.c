@@ -6,7 +6,7 @@
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:52:59 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/19 02:39:45 by mimacdou         ###   ########.fr       */
+/*   Updated: 2026/07/19 02:50:59 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	get_starting_direction(char **map)
 		while (map[h][i])
 		{
 			if (\
-map[h][i] == 'N' || map[h][i] == 'S' || map[h][i] == 'W' || map[h][i] == 'S')
+map[h][i] == 'N' || map[h][i] == 'S' || map[h][i] == 'W' || map[h][i] == 'E')
 				return (map[h][i]);
 			i++;
 		}

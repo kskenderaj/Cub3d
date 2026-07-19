@@ -6,7 +6,7 @@
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 18:00:00 by klejdi            #+#    #+#             */
-/*   Updated: 2026/07/19 02:35:44 by mimacdou         ###   ########.fr       */
+/*   Updated: 2026/07/19 02:53:24 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ old_plane_x * sin(angle) + game->player.plane_y * cos(angle);
 static void	handle_rotation(t_game *game)
 {
 	if (mlx_is_key_down(game->mlx.mlx, KEY_LEFT))
-		rotate_player(game, 1);
-	if (mlx_is_key_down(game->mlx.mlx, KEY_RIGHT))
 		rotate_player(game, -1);
+	if (mlx_is_key_down(game->mlx.mlx, KEY_RIGHT))
+		rotate_player(game, 1);
 }
 
 static void	handle_exit(t_game *game)
