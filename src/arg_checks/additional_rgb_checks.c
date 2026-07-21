@@ -6,7 +6,7 @@
 /*   By: mimacdou <mimacdou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:51:57 by mimacdou          #+#    #+#             */
-/*   Updated: 2026/07/19 02:22:23 by mimacdou         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:16:20 by mimacdou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,26 @@ static void	zeros_check(int fd, char *line, int flag, char **octect)
 	}
 }
 
+int	all_digits_check(char *octect)
+{
+	char	*trimmed;
+	int	j;
+
+	if (!octect)
+		return 0;
+	trimmed = ft_strtrim(octect, " \t\n\r\v\f");
+	if (!trimmed)
+		return 0;
+	j = 0;
+	while (trimmed[j])
+	{
+		if (!ft_isdigit(trimmed[j]))
+			return (free(trimmed), 0);
+		j++;
+	}
+	return (free(trimmed), 1);
+}
+
 void	additional_rgb_checks(int fd, char *line, int flag)
 {
 	char	**octect;
@@ -99,7 +119,7 @@ void	additional_rgb_checks(int fd, char *line, int flag)
 		if (!octect[i])
 			(free_matrix(octect, 3), invaild_rgb(fd, line, flag));
 		num = atoi(octect[i]);
-		if (num > 255 || num < 0)
+		if (!all_digits_check(octect[i]) || num > 255 || num < 0)
 			(free_matrix(octect, 3), invaild_rgb(fd, line, flag));
 		i++;
 	}
