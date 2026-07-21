@@ -96,6 +96,8 @@ typedef struct s_ray
 	int		side;
 	int		step_x;
 	int		step_y;
+	int		map_x;
+	int		map_y;
 }	t_ray;
 
 typedef struct s_game
